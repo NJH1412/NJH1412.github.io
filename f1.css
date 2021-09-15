@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+}
+
+.header{
+    text-align: center;
+    padding-top: 15px;
+}
+
+ul {
+    width: 25%;
+    background-color: #f1f1f1;
+    height: 100%;
+    margin: 0;
+    position: fixed;
+}
+
+.column1{
+    margin-left: 30%;
+    float: left;
+    padding: 10px;
+    width: 35%;
+    height: 50%;
+}
+
+.column2{
+    padding: 10px;
+}
