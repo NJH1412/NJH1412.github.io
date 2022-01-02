@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    attribute vec4 aPosition;
+
+    void main(){
+        gl_Position = aPosition;
+    }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+    precision mediump float;
+    void main()
+    {
+         gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+</script>
+
+<button id = "Button4">Increase Subdivisions</button>
+<button id = "Button5">Decrease Subdivisions</button>
+
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MVnew.js"></script>
+<script type="text/javascript" src="6.1a.js"></script>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+    Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>

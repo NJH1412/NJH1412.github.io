@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title></title>
+
+<!--    正三角形-->
+    <script id="trivshader" type="x-shader/x-vertex">
+		attribute vec4 vPosition;
+
+		uniform vec4 u_Translation;
+
+		void main(){
+			gl_Position = vPosition + vPosition;
+		}
+		</script>
+
+    <script id="trifshader" type="x-shader/x-fragment">
+		precision mediump float;
+		varying vec4 v_Color;
+		void main(){
+			 gl_FragColor = vec4( 0.0, 0.0, 1.0, 1.0 );
+		}
+	</script>
+
+    <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="../Common/webgl-debug.js"></script>
+    <script type="text/javascript" src="../Common/initShaders.js"></script>
+    <script type="text/javascript" src="../Common/cuon-utils.js"></script>
+    <script type="text/javascript" src="../Common/cuon-matrix.js"></script>
+    <script type="text/javascript" src="../Common/gl-matrix-min.js"></script>
+
+    <script type="text/javascript" src="task2.js"></script>
+</head>
+
+<body onload="main()">
+<canvas id="canvas" width="512" height="512">你的浏览器不支持HTML5 canvas元素
+</canvas>
+<fieldset>
+    <legend>控制选项</legend>
+
+    <select id="select" size="4">
+        <option value="0">正三角形</option>
+        <option value="1">正方形</option>
+        <option value="2">立方体</option>
+        <option value="3">圆</option>
+    </select>
+    <td colspan='2'><input type='color' id='ka-color' name='kacolor' value='#ff0000'></td></br>
+
+    <button id="clean">清空画布</button>
+</fieldset>
+</body>
+
+</html>

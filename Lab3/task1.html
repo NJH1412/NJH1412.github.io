@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>实验三任务a</title>
+    <script id="vertex-shader" type="x-shader/x-vertex">
+	attribute vec4 vPosition;
+	attribute vec4 vColor;
+    uniform float theta;
+
+	varying vec4 fColor;
+
+	void main()
+	{
+		float u = cos( theta );
+		float v = sin( theta );
+
+		gl_Position.x = vPosition.x * u - vPosition.y * v;
+		gl_Position.y = vPosition.x * v + vPosition.y * u;
+		gl_Position.z = 0.0;
+		gl_Position.w = 1.0;
+
+		fColor = vColor;
+	}
+	</script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+	precision mediump float;
+
+	varying vec4 fColor;
+
+	void main()
+	{
+		gl_FragColor = fColor;
+	}
+	</script>
+
+    <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="../Common/initShaders.js"></script>
+    <script type="text/javascript" src="../Common/gl-matrix-min.js"></script>
+
+    <script type="text/javascript" src="task1.js"></script>
+</head>
+
+<body onload="initPolygonCanvas()">
+    <canvas id="ply-canvas" width="512" height="512">你的浏览器不支持HTML5 canvas元素</canvas><br>
+    <button id="closepoly">闭合多边形</button>
+    <select id="cmenu" size="7">
+        <option value="0">Black</option>
+        <option value="1">Red</option>
+        <option value="2">Yellow</option>
+        <option value="3">Green</option>
+        <option value="4">Blue</option>
+        <option value="5">Magenta</option>
+        <option value="6">Cyan</option>
+    </select>
+    <br>
+    <button id="direction" onclick="changeDir()">换个转动方向</button><br>
+    转动速度
+    Speed 0<input type="range" id="speedcon" min="0" max="100" value="50" step="10"> 100
+</body>
+
+</html>

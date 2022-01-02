@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>实验二任务e</title>
+    <!-- 顶点着色器和片元着色器代码 -->
+    <script id="vertex-shader" type="x-shader/x-vertex">
+		attribute vec4 vPosition;
+		uniform float theta;
+		void main(){
+		    float d = sqrt(vPosition.x * vPosition.x + vPosition.y * vPosition.y);
+            float u_CosB = cos (d * theta);
+            float u_SinB = sin (d * theta);
+            gl_Position.x = vPosition.x * u_CosB - vPosition.y * u_SinB;
+            gl_Position.y = vPosition.x * u_SinB + vPosition.y * u_CosB;
+            gl_Position.z = vPosition.z;
+            gl_Position.w = 1.0;
+		}
+		</script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+		precision mediump float;
+		void main(){
+			 gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+		}
+		</script>
+    <!-- 一组相关的JS库 -->
+    <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="../Common/webgl-debug.js" ></script>
+    <script type="text/javascript" src="../Common/cuon-utils.js" ></script>
+    <script type="text/javascript" src="../Common/initShaders.js"></script>
+    <script type="text/javascript" src="../Common/gl-matrix-min.js"></script>
+    <script type="text/javascript" src="../Common/MV.js"></script>
+    <!-- 绘制三角形的JS代码 -->
+    <script type="text/javascript" src="task5.js"></script>
+</head>
+<body>
+<canvas id="triangle-canvas" style="border:none;" width="500" height="500"></canvas>
+</body>
+</html>

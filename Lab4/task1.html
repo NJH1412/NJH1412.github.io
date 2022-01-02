@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-type" content="text/html;charset=utf-8">
+  <title>Chap4 Demo</title>
+  <script id="rtvshader" type="x-shader/x-vertex">
+	attribute vec4 vPosition;
+	attribute vec4 vColor;
+	varying vec4 fColor;
+
+	uniform vec3 theta;
+	uniform float ux_Scale, uy_Scale, uz_Scale;
+	uniform vec4 u_Translation;
+
+	void main()
+	{
+
+		//compute the sins and cos of theta for each of the three axis in one computation
+		vec3 angles = radians( theta );
+		vec3 cost = cos( theta );
+		vec3 sint = sin( theta );
+
+		mat4 rx = mat4(  1.0,  0.0,  0.0, 0.0,
+						 0.0,  cost.x,  sint.x, 0.0,
+						 0.0,  -sint.x,  cost.x, 0.0,
+						 0.0,  0.0,  0.0, 1.0
+						 );
+
+		mat4 ry = mat4(  cost.y,  0.0, -sint.y,  0.0,
+						 0.0,  1.0,  0.0,  0.0,
+						 sint.y,  0.0,  cost.y,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+
+		mat4 rz = mat4(  cost.z,  sint.z,  0.0,  0.0,
+						 -sint.z,  cost.z,  0.0,  0.0,
+						 0.0,  0.0,  1.0,  0.0,
+						 0.0,  0.0,  0.0,  1.0
+						 );
+
+		fColor = vColor;
+		gl_Position = rz * ry * rx * vPosition;
+		gl_Position.z = -gl_Position.z;
+
+        gl_Position = gl_Position + u_Translation;//缩放
+
+        gl_Position.x = gl_Position.x * ux_Scale;//平移
+        gl_Position.y = gl_Position.y * uy_Scale;
+        gl_Position.z = gl_Position.z * uz_Scale;
+
+		gl_Position.w = 1.0;
+
+	}
+	</script>
+
+
+  <script id="rtfshader" type="x-shader/x-fragment">
+	precision mediump float;
+	varying vec4 fColor;
+
+	void main()
+	{
+		gl_FragColor = fColor;
+	}
+	</script>
+  <script type="text/javascript" src="../Common/webgl-utils.js"></script>
+  <script type="text/javascript" src="../Common/initShaders.js"></script>
+  <script type="text/javascript" src="../Common/gl-matrix-min.js"></script>
+
+  <script type="text/javascript" src="task1.js"></script>
+</head>
+
+<body>
+<h1>旋转的立方体</h1>
+<canvas id="rtcb-canvas" width="600" height="600">
+  你的浏览器不支持HTML5 canvas元素
+</canvas>
+
+<button id="xbutton">Rotate X</button>
+<button id="ybutton">Rotate Y</button>
+<button id="zbutton">Rotate Z</button>
+
+<p>请输入三轴的平移距离</p>
+x轴：<input id="trans_x"><br/>
+y轴：<input id="trans_y"><br/>
+z轴：<input id="trans_z"><br/>
+
+<p>请输入三轴的缩放倍数</p>
+x轴：<input id="scale_x"><br/>
+y轴：<input id="scale_y"><br/>
+z轴：<input id="scale_z"><br/>
+
+<button type="button" onclick="initCube()">Submit</button>
+</body>
+
+</html>
