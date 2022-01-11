@@ -3,10 +3,10 @@
 var gl;
 var points=[];
 var numTimesToSubdivides=3;
-var angle=180.0;
-var spin=Math.PI*angle/180.0;
+var angle=0;
+var spin=0;
 
-window.onload = function init(){
+function init(){
     var canvas = document.getElementById( "triangle-canvas" );
     gl = WebGLUtils.setupWebGL(canvas);
     if(!gl){
@@ -21,6 +21,9 @@ window.onload = function init(){
          vec2(0.0, -1.0),
          vec2(0.5, 0.7),
     ];
+
+    angle = document.getElementById("num").value;
+    spin=Math.PI*angle/180.0;
 
     divideTriangle(vertices[0], vertices[1], vertices[2], numTimesToSubdivides);
 

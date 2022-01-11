@@ -3,7 +3,7 @@
 var gl;
 var points=[];
 
-window.onload = function init(){
+function init(){
     var canvas = document.getElementById( "triangle-canvas" );
     gl = WebGLUtils.setupWebGL(canvas);
     if(!gl){
@@ -17,7 +17,7 @@ window.onload = function init(){
     ];
 
     var numTimesToSubdivides=4;
-    var angle=-60.0;
+    var angle=document.getElementById("num").value;
     var spin=Math.PI*angle/180.0;
     var cos=Math.cos(spin);
     var sin=Math.sin(spin);
